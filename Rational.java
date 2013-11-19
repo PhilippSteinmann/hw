@@ -4,7 +4,9 @@ Period 9
 HW 27
 2013-11-18
 http:www.stuycs.org/courses/ap-computer-science/brownmykolyk/hw/hw27
-*/ public class Rational {
+*/ 
+
+public class Rational {
     public int _numerator;
     public int _denominator;
     
@@ -15,7 +17,7 @@ http:www.stuycs.org/courses/ap-computer-science/brownmykolyk/hw/hw27
 
     public Rational(int numerator, int denominator) {
         this();
-        if (denominator != 0) {
+        if (denominator != 0) { // if not invalid
             _numerator = numerator;
             _denominator = denominator;
             reduce();
@@ -69,6 +71,7 @@ http:www.stuycs.org/courses/ap-computer-science/brownmykolyk/hw/hw27
         return answer;
     }
 
+    // reduces fraction to simplest terms using #gcd
     public void reduce() {
         int factor = gcd(_numerator, _denominator);
         _numerator /= factor;
@@ -79,6 +82,8 @@ http:www.stuycs.org/courses/ap-computer-science/brownmykolyk/hw/hw27
         return _numerator + " / " + _denominator;
     }
 
+    // returns -1, 0, or 1 depending on whether fraction is bigger or smaller 
+    // than another
     public int compareTo (Rational other) {
         double val = doubleValue();
         double valOther = other.doubleValue();
