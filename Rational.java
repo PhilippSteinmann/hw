@@ -1,14 +1,15 @@
 /*
-Philipp Steinmann
-Period 9
-HW 27
-2013-11-18
-http:www.stuycs.org/courses/ap-computer-science/brownmykolyk/hw/hw27
+	Philipp Steinmann
+	Period 9
+	HW 28
+	2013-11-19
+	http://www.stuycs.org/courses/ap-computer-science/brownmykolyk/hw/hw27
+	http://www.stuycs.org/courses/ap-computer-science/brownmykolyk/hw/hw28
 */ 
 
-public class Rational {
-    public int _numerator;
-    public int _denominator;
+public class Rational implements Comparable {
+    private int _numerator;
+    private int _denominator;
     
     public Rational() {
         _numerator = 0;
@@ -84,16 +85,26 @@ public class Rational {
 
     // returns -1, 0, or 1 depending on whether fraction is bigger or smaller 
     // than another
-    public int compareTo (Rational other) {
+    public int compareTo (Object other) {
         double val = doubleValue();
-        double valOther = other.doubleValue();
 
-        if (val < valOther)
-            return -1;
-        else if (val == valOther)
-            return 0;
-        else
-            return 1;
+	if (other instanceof Rational) {
+		double valOther = ((Rational) other).doubleValue();
+
+		if (val < valOther)
+		    return -1;
+		else if (val == valOther)
+		    return 0;
+		else
+		    return 1;
+	}
+	else
+		return -1;
+    }
+	
+
+    public boolean equals (Rational other) {
+        return doubleValue() == other.doubleValue(); // in the case that either is not reduced
     }
 
     public static void main(String[] spaghetti) {
@@ -104,6 +115,7 @@ public class Rational {
         Rational half = new Rational(1, 2);
         Rational two = new Rational(2, 1);
         Rational four = new Rational(4, 1);
+        String notARational = "hahaha";
 
         drafting.multiply(two);
         System.out.println(drafting + " = " + drafting.doubleValue() + " \t\t(doubled)");
@@ -121,5 +133,7 @@ public class Rational {
         
         drafting.add(half);
         System.out.println(drafting.compareTo(half) + " \t\t\t(compared to 1/2)");
+        System.out.println(drafting.compareTo(notARational) + "\t\t\t(compared to \"hahaha\")");
+        System.out.println(drafting.equals(half) + "\t\t\t(equal to 1/2?)");
     }
 }
